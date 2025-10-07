@@ -20,7 +20,7 @@ Esempio:
 ```lua
 edoardo = { -- DEFINISCO LE PROPRIETÀ DI EDOARDO
   x_pos = 100, -- | all'inizio è posizionato
-  y_pos = 50,  -- | al puto (100,50)
+  y_pos = 50,  -- | al punto (100,50)
   walking_speed = 300, -- cammina a 300
   running_speed = 500, -- corre a 500
   fav_color = {0, 255, 0}, -- verde
