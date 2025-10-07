@@ -16,10 +16,10 @@ La definizione puntuale di tutti i personaggi del gioco avviene nel file `npcs.l
 
 ## Funzioni utili
 In tutto il gioco vengono spesso fatti richiami a funzioni comuni molto utili per l'ordinaria gestione delle dinamiche basilari. Ecco riportati i dettagli di queste funzioni nella seguente tabella.
-| Nome della funzione | Argomenti | Descrizione | Dov'è dichiarata |
-| ------------------- | --------- | ----------- | ---------------- |
-| `showDialogBox` | `npc_speaking` <sup>(→<code>npcs.lua</code>)</sup>, `dialog_title` <sup>(→<code>dialogs.lua</code>)</sup>, `effect` <sup>(→<code>dialog_effects.lua</code>)</sup> | Fa apparire sopra a `npc_speaking` il dialogo `dialog_title` con l'effetto `effect` | - |
-| `checkActionProximity` | `player` <sup>(→<code>npcs.lua</code>)</sup>, `npc` <sup>(→<code>npcs.lua</code>)</sup> | Controlla se il giocatore `player` è entro il raggio di azione dell'`npc`; per *azione* si intende ad esempio che il giocatore gli possa parlare | - |
-| `cameraDeadZone` | `margin_top_bottom` <sup>(→<code>game_settings.lua</code>)</sup>, `margin_left_right` <sup>(→<code>game_settings.lua</code>)</sup> | Consente alla camera del gioco di spostarsi seguendo il giocatore, purché esso non si trovi all'interno della dead zone (che ha margine superiore/inferiore `margin_top_bottom` e sinistro/destro `margin_left_right` dai bordi della finestra del gioco) | - |
+| Nome della funzione | Argomenti | Descrizione | Dov'è dichiarata | Sottofunzioni di cui fa uso |
+| ------------------- | --------- | ----------- | ---------------- | ----------------------------|
+| `showDialogBox` | `npc_speaking` <sup>(→<code>npcs.lua</code>)</sup>, `dialog_title` <sup>(→<code>dialogs.lua</code>)</sup>, `effect` <sup>(→<code>dialog_effects.lua</code>)</sup> | Fa apparire sopra a `npc_speaking` il dialogo `dialog_title` con l'effetto `effect` | - | `dialogBoxTextPopupEffect` |
+| `checkActionProximity` | `player` <sup>(→<code>npcs.lua</code>)</sup>, `npc` <sup>(→<code>npcs.lua</code>)</sup> | Controlla se il giocatore `player` è entro il raggio di azione dell'`npc`; per *azione* si intende ad esempio che il giocatore gli possa parlare | - | - |
+| `cameraDeadZone` | `margin_top_bottom` <sup>(→<code>game_settings.lua</code>)</sup>, `margin_left_right` <sup>(→<code>game_settings.lua</code>)</sup> | Consente alla camera del gioco di spostarsi seguendo il giocatore, purché esso non si trovi all'interno della dead zone (che ha margine superiore/inferiore `margin_top_bottom` e sinistro/destro `margin_left_right` dai bordi della finestra del gioco) | - | - |
 
 Il simbolo → indica in quale file gli argomenti delle funzioni sono originariamente definiti.
