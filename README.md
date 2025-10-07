@@ -18,14 +18,14 @@ La definizione puntuale di tutti i personaggi del gioco avviene nel file `npcs.l
 
 Esempio:
 ```lua
-edoardo = {
-  x_pos = 100,
-  y_pos = 50,
-  walking_speed = 300,
-  running_speed = 500,
+edoardo = { -- DEFINISCO LE PROPRIETÀ DI EDOARDO
+  x_pos = 100, -- | all'inizio è posizionato
+  y_pos = 50,  -- | al puto (100,50)
+  walking_speed = 300, -- cammina a 300
+  running_speed = 500, -- corre a 500
   fav_color = {0, 255, 0}, -- verde
   anim_state = 0, -- nessuna animazione
-  icon_state = 0, -- nessuna icona
+  icon_state = 0 -- nessuna icona
 }
 ```
 
