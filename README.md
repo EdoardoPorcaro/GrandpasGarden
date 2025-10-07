@@ -18,7 +18,7 @@ La definizione puntuale di tutti i personaggi del gioco avviene nel file `npcs.l
 In tutto il gioco vengono spesso fatti richiami a funzioni comuni molto utili per l'ordinaria gestione delle dinamiche basilari. Ecco riportati i dettagli di queste funzioni nella seguente tabella.
 | Nome della funzione | Argomenti | Descrizione | Dov'è dichiarata |
 | ------------------- | --------- | ----------- | ---------------- |
-| `showDialogBox` | `npc_speaking` <sup>⇌<code>npcs.lua</code></sup>, `dialog_title`, `effect` | Fa apparire sopra a `npc_speaking` il dialogo `dialog_title` (⇌ `dialogs.lua`) con l'effetto `effect` applicato (⇌ `dialog_effects.lua`) | - |
+| `showDialogBox` | `npc_speaking` <sup>(→<code>npcs.lua</code>)</sup>, `dialog_title`, `effect` | Fa apparire sopra a `npc_speaking` il dialogo `dialog_title` (⇌ `dialogs.lua`) con l'effetto `effect` applicato (⇌ `dialog_effects.lua`) | - |
 | `checkActionProximity` | `player`, `npc` | Controlla se il giocatore `player` (⇌ `npcs.lua`) è entro il raggio di azione dell'`npc` (⇌ `npcs.lua`); per *azione* si intende ad esempio che il giocatore gli possa parlare | - |
 | `cameraDeadZone` | `margin_top_bottom`, `margin_left_right` | Consente alla camera del gioco di spostarsi seguendo il giocatore, purché esso non si trovi all'interno della dead zone (che ha margine superiore/inferiore `margin_top_bottom` (⇌ `game_settings.lua`) e sinistro/destro `margin_left_right` (⇌ `game_settings.lua`) dai bordi della finestra del gioco) | - |
 
