@@ -1,6 +1,10 @@
 # Informazioni sul codice
 In questa fase dello sviluppo, riporto qui alcune annotazioni su funzioni e tipi di dati/variabili.
 
+## Indice
+1. [Personaggi](#personaggi)
+2. [Funzioni utili](#funzioni-utili)
+
 ## Personaggi
 Le variabili che definiscono ciascun personaggio sono elencate e commentate di seguito.
 | Nome della variabile | Tipo | Descrizione |
