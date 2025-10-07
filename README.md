@@ -16,7 +16,7 @@ Le variabili che definiscono ciascun personaggio sono elencate e commentate di s
 
 La definizione puntuale di tutti i personaggi del gioco avviene nel file `npcs.lua`.
 
-Esempio:
+### Esempio
 ```lua
 edoardo = { -- DEFINISCO LE PROPRIETÀ DI EDOARDO
   x_pos = 100, -- | all'inizio è posizionato
