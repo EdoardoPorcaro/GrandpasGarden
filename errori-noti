@@ -1,1 +1,0 @@
-- nei dialogbox, le lettere accentate fanno crashare il gioco
