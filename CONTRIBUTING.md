@@ -4,13 +4,13 @@
 
 ## Table of contens
 
-1. [License & Usage (tddr)](#license--usage)
+1. [License & Usage (tldr)](#license--usage)
 2. [How to contribute](#how-to-contribute)
 3. [Issues](#issues)
 4. [Pull Request Review](#pull-request-review)
 5. [Communication](#communication)
 
-## License & Usage (tddr)
+## License & Usage (tldr)
 
 - Grandpa's Garden is free-to-play and source-available.
 - The source code is visible for educational purposes only.
