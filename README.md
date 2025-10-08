@@ -67,9 +67,7 @@ Do NOT publicly disclose issues before they are resolved to protect all users.
 
 ## Thank You!
 
-Thank you for your interest in Grandpa's Garden! 🌱
-
-Enjoy exploring the game, learning from the code, and following its development.
+*Thank you for your interest and support. Enjoy watching Grandpa's Garden grow!* 🌱
 
 *Edoardo Porcaro ⋅ 2025*
 
