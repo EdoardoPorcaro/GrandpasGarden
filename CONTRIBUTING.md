@@ -1,10 +1,10 @@
 # Grandpa's Garden – Contributing Guidelines
 
-*Thank you for your interest in contributing to Grandpa's Garden!* This document explains how you can participate while respecting the license and rules of the project.
+*Thank you for your interest in contributing to Grandpa's Garden!* This document explains how you can participate to development while respecting the license and rules of the project.
 
 ## Table of contens
 
-1. [License & Usage](#license-usage)
+1. [License & Usage](#license--usage)
 2. [How to Contribute](#how-to-contribute)
 3. [Issues](#issues)
 4. [Pull Request Review](#pull-request-review)
@@ -46,4 +46,8 @@ All contributions must be submitted via [GitHub pull requests](https://github.co
 - Keep conversations on GitHub (Issues, Pull Requests) for transparency.
 - Personal messages or outside channels will not override the LICENSE terms.
 
+---
+
 *Once again, thank you for your interest and support. Enjoy watching Grandpa's Garden grow!* 🌱
+
+*Edoardo Porcaro ⋅ 2025*
