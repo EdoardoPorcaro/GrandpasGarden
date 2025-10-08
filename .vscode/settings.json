@@ -1,0 +1,9 @@
+{
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.diagnostics.globals": ["love"],
+    "Lua.workspace.library": [
+        "/usr/share/lua/5.1",
+        "/usr/share/love"
+    ],
+    "Lua.telemetry.enable": false
+}
