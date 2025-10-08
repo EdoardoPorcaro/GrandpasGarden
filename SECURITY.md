@@ -7,8 +7,8 @@ Please follow this policy if you discover any security vulnerabilities.
 
 1. [Reporting a security issue](#reporting-a-security-issue)
 2. [Scope](#scope)
-  1. [In-scope](#in-scope)
-  2. [Out-of-scope](#out-of-scope)
+    1. [In-scope](#in-scope)
+    2. [Out-of-scope](#out-of-scope)
 3. [Response and Resolution](#response-and-resolution)
 4. [Responsible Disclosure](#responsible-disclosure)
 
