@@ -16,7 +16,7 @@
 - The source code is visible for educational purposes only.
 - You may NOT modify, redistribute, or sell the game or any of its assets (including sprites, audio, text, or fonts) without explicit permission.
 - Playing the game or studying the code implies acceptance of these terms.
-- To dive deeper, please [read the full LICENSE](https://github.com/EdoardoPorcaro/GrandpasGarden/blob/main/LICENSE.md).
+- To dive deeper, [please read the full LICENSE](https://github.com/EdoardoPorcaro/GrandpasGarden/blob/main/LICENSE.md).
 
 ## How to contribute
 
