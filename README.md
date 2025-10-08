@@ -1,4 +1,4 @@
-# Grandpa's Garden
+# Grandpa's Garden 🌱
 
 Grandpa's Garden is a free-to-play, source-available RPG videogame telling the story of my life. 
 
@@ -20,8 +20,8 @@ Grandpa's Garden is source-available, free-to-play, and educational.
 
 - You can read and study the code freely.
 - Modifying, redistributing, or selling the game or any of its assets is strictly prohibited.
-- Only contributions via [GitHub Pull Requests](./pulls) will be considered.
-- Follow the development and read updates in the [Discussions tab](./discussions), and find detailed information in the [Wiki](./wiki).
+- Only contributions via [GitHub Pull Requests](https://github.com/EdoardoPorcaro/GrandpasGarden/pulls) will be considered.
+- Follow the development and read updates in the [Discussions tab](https://github.com/EdoardoPorcaro/GrandpasGarden/discussions), and find detailed information in the [Wiki](https://github.com/EdoardoPorcaro/GrandpasGarden/wiki).
 
 ## About the game
 
@@ -33,27 +33,27 @@ The game is open for exploration and study, but all assets and the core code rem
 
 ## License
 
-Please [read the LICENSE carefully](./blob/main/LICENSE.md) before using or interacting with Grandpa's Garden.
+Please [read the LICENSE carefully](./LICENSE.md) before using or interacting with Grandpa's Garden.
 
 By playing the game, reading the code, or submitting contributions, you agree to abide by all terms described in the LICENSE.
 
 ## How to contribute
 
-- All contributions must be submitted through [GitHub Pull Requests](./pulls).
+- All contributions must be submitted through [GitHub Pull Requests](https://github.com/EdoardoPorcaro/GrandpasGarden/pulls).
 - Only bug fixes, code improvements, or suggestions that do not modify core assets will be considered.
 - Follow the coding style used in the project (Lua + LÖVE framework).
-- Detailed guidelines are available in [CONTRIBUTING.md](./blob/main/CONTRIBUTING.md).
+- Detailed guidelines are available in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Issues & Feedback
 
-- Use [GitHub Issues](./issues) to report bugs or request features.  
+- Use [GitHub Issues](https://github.com/EdoardoPorcaro/GrandpasGarden/issues) to report bugs or request features.  
 - Suggestions and feedback are welcome, but remember that assets cannot be redistributed or modified without explicit permission.  
-- Check out the [Discussions tab](./discussions) to follow development updates and ongoing conversations about the project.
+- Check out the [Discussions tab](https://github.com/EdoardoPorcaro/GrandpasGarden/discussions) to follow development updates and ongoing conversations about the project.
 
 
 ## Wiki
 
-The [Wiki](./wiki) contains detailed information about:
+The [Wiki](https://github.com/EdoardoPorcaro/GrandpasGarden/wiki) contains detailed information about:
 - Game mechanics and rules
 - Story, characters, and locations
 - Technical details for those studying the code
@@ -61,7 +61,7 @@ The [Wiki](./wiki) contains detailed information about:
 
 ## Security
 
-If you discover any security vulnerabilities, please follow the instructions in [SECURITY.md](./blob/main/SECURITY.md).
+If you discover any security vulnerabilities, please follow the instructions in [SECURITY.md](./SECURITY.md).
 
 Do NOT publicly disclose issues before they are resolved to protect all users.  
 
@@ -71,7 +71,7 @@ Thank you for your interest in Grandpa's Garden!
 
 Enjoy exploring the game, learning from the code, and following its development.
 
-<centering><i>Grandpa's Garden</i> 🌱<br />Edoardo Porcaro ⋅ 2025<i></i></centering>
+<p align=center"><i>Grandpa's Garden</i> 🌱<br /><i>Edoardo Porcaro ⋅ 2025</i></p>
 
 ---
 
