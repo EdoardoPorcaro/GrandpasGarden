@@ -1,13 +1,22 @@
 # Grandpa's Garden – Security Policy
 
-The safety and integrity of Grandpa's Garden and its users are important.
+*Thank you for your interest in contributing to Grandpa's Garden!* The safety and integrity of Grandpa's Garden and its users are important.
 Please follow this policy if you discover any security vulnerabilities.
 
-## Reporting a Security Issue
+## Table of contents
+
+1. [Reporting a security issue](#reporting-a-security-issue)
+2. [Scope](#scope)
+  1. [In-scope](#in-scope)
+  2. [Out-of-scope](#out-of-scope)
+3. [Response and Resolution](#response-and-resolution)
+4. [Responsible Disclosure](#responsible-disclosure)
+
+## Reporting a security issue
 
 - Report vulnerabilities via [GitHub Issues](https://github.com/EdoardoPorcaro/GrandpasGarden/issues) or contact the project owner
   directly if an email is provided in the repository.
-- **Do NOT disclose the issue publicly** before it has been addressed.
+- Do NOT disclose the issue publicly before it has been addressed.
 
 ## Scope
 
@@ -28,8 +37,12 @@ Please follow this policy if you discover any security vulnerabilities.
 
 ## Responsible Disclosure
 
-- **Do NOT attempt to exploit or publicly share vulnerabilities.**
+- Do NOT attempt to exploit or publicly share vulnerabilities.
 - Respect the project LICENSE; do not use security issues for malicious purposes.
 - Coordinated disclosure ensures protection for all users and maintains the integrity of the game.
 
-Thank you for helping us keep Grandpa's Garden safe and enjoyable!
+---
+
+*Once again, thank you for your interest and support. Enjoy watching Grandpa's Garden grow!* 🌱
+
+*Edoardo Porcaro ⋅ 2025*
