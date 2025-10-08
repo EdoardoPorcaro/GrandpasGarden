@@ -2,7 +2,7 @@
 
 *Thank you for your interest in contributing to Grandpa's Garden!* This document explains how you can participate to development while respecting the license and rules of the project.
 
-## Table of contens
+## Table of contents
 
 1. [License & Usage (tldr)](#license--usage)
 2. [How to contribute](#how-to-contribute)
