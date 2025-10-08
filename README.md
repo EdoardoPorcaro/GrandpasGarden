@@ -67,9 +67,9 @@ Do NOT publicly disclose issues before they are resolved to protect all users.
 
 ## Thank You!
 
-*Thank you for your interest and support. Enjoy watching Grandpa's Garden grow!* 🌱
+Thank you for your interest and support. Enjoy watching Grandpa's Garden grow! 🌱
 
-*Edoardo Porcaro ⋅ 2025*
+Edoardo Porcaro ⋅ 2025
 
 ---
 
