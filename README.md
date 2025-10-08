@@ -1,3 +1,80 @@
+# Grandpa's Garden
+
+Grandpa's Garden is a free-to-play, source-available RPG videogame telling the story of my life. 
+
+It's written in Lua and built using the [LÖVE framework](https://love2d.org/).
+
+## Table of contents
+1. [TLDR](#tldr)
+2. [About the game](#about-the-game)
+3. [License](#license)
+4. [How to contribute](#how-to-contribute)
+5. [Issues & Feedback](#issues--feedback)
+6. [Wiki](#wiki)
+7. [Security](#security)
+8. [Thank You](#thank-you)
+
+## TLDR
+
+Grandpa's Garden is source-available, free-to-play, and educational.
+
+- You can read and study the code freely.
+- Modifying, redistributing, or selling the game or any of its assets is strictly prohibited.
+- Only contributions via [GitHub Pull Requests](./pulls) will be considered.
+- Follow the development and read updates in the [Discussions tab](./discussions), and find detailed information in the [Wiki](./wiki).
+
+## About the game
+
+Grandpa's Garden is a personal RPG project started from scratch.  
+
+It combines narrative storytelling with traditional RPG mechanics.  
+
+The game is open for exploration and study, but all assets and the core code remain protected under the LICENSE.
+
+## License
+
+Please [read the LICENSE carefully](./blob/main/LICENSE.md) before using or interacting with Grandpa's Garden.
+
+By playing the game, reading the code, or submitting contributions, you agree to abide by all terms described in the LICENSE.
+
+## How to contribute
+
+- All contributions must be submitted through [GitHub Pull Requests](./pulls).
+- Only bug fixes, code improvements, or suggestions that do not modify core assets will be considered.
+- Follow the coding style used in the project (Lua + LÖVE framework).
+- Detailed guidelines are available in [CONTRIBUTING.md](./blob/main/CONTRIBUTING.md).
+
+## Issues & Feedback
+
+- Use [GitHub Issues](./issues) to report bugs or request features.  
+- Suggestions and feedback are welcome, but remember that assets cannot be redistributed or modified without explicit permission.  
+- Check out the [Discussions tab](./discussions) to follow development updates and ongoing conversations about the project.
+
+
+## Wiki
+
+The [Wiki](./wiki) contains detailed information about:
+- Game mechanics and rules
+- Story, characters, and locations
+- Technical details for those studying the code
+- Guides for understanding and exploring Grandpa's Garden
+
+## Security
+
+If you discover any security vulnerabilities, please follow the instructions in [SECURITY.md](./blob/main/SECURITY.md).
+
+Do NOT publicly disclose issues before they are resolved to protect all users.  
+
+## Thank You!
+
+Thank you for your interest in Grandpa's Garden!
+
+Enjoy exploring the game, learning from the code, and following its development.
+
+<centering><i>Grandpa's Garden</i> 🌱<br />Edoardo Porcaro ⋅ 2025<i></i></centering>
+
+---
+
 # Informazioni sul codice
 In questa fase dello sviluppo, riporto qui alcune annotazioni su funzioni e tipi di dati/variabili.
 
