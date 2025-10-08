@@ -4,27 +4,28 @@
 
 ## Table of contens
 
-1. [License & Usage](#license--usage)
-2. [How to Contribute](#how-to-contribute)
+1. [License & Usage (tddr)](#license--usage)
+2. [How to contribute](#how-to-contribute)
 3. [Issues](#issues)
 4. [Pull Request Review](#pull-request-review)
 5. [Communication](#communication)
 
-## License & Usage
+## License & Usage (tddr)
 
 - Grandpa's Garden is free-to-play and source-available.
 - The source code is visible for educational purposes only.
 - You may NOT modify, redistribute, or sell the game or any of its assets (including sprites, audio, text, or fonts) without explicit permission.
 - Playing the game or studying the code implies acceptance of these terms.
+- To dive deeper, please [read the full LICENSE](https://github.com/EdoardoPorcaro/GrandpasGarden/blob/main/README.md).
 
-## How to Contribute
+## How to contribute
 
-All contributions must be submitted via [GitHub pull requests](https://github.com/EdoardoPorcaro/GrandpasGarden/pulls). Direct commits to the main branch are not allowed.
+All contributions must be submitted via [GitHub Pull Requests](https://github.com/EdoardoPorcaro/GrandpasGarden/pulls). Direct commits to the main branch are not allowed.
 
 - Only bug fixes, suggestions, or improvements that do NOT change the 
   core assets or game content will be considered.
 - Before submitting a pull request, please make sure your code:
-  - Follows the existing code style (Lua + LÖVE framework conventions)
+  - Follows the existing code style (Lua + LÖVE framework)
   - Is thoroughly tested and does not break existing functionality
 - Include a clear description of the changes and the reason for the change.
 
@@ -43,7 +44,7 @@ All contributions must be submitted via [GitHub pull requests](https://github.co
 ## Communication
 
 - Feedback and discussion should remain respectful.
-- Keep conversations on GitHub (Issues, Pull Requests) for transparency.
+- Keep conversations on GitHub ([Issues](https://github.com/EdoardoPorcaro/GrandpasGarden/issues), [Pull Requests](https://github.com/EdoardoPorcaro/GrandpasGarden/pulls), [Discussions](https://github.com/EdoardoPorcaro/GrandpasGarden/discussions)) for transparency.
 - Personal messages or outside channels will not override the LICENSE terms.
 
 ---
