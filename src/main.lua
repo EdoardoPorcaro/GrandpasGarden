@@ -1,386 +1,68 @@
-------------------------------------------------------------
--- main.lua
--- Gioco RPG 2D base in LÖVE (Lua)
---
--- Funzionalità:
--- - Movimento del giocatore (WASD, frecce, tastierino)
--- - NPC con collisione (non attraversabili)
--- - Dialoghi animati (lettera per lettera)
--- - Scelte multiple nel dialogo
--- - Dialog box dinamica e auto-dimensionata
--- - Posizionamento della camera con "dead zone"
--- - Tutti i calcoli relativi alla dimensione della finestra
-------------------------------------------------------------
+local load_game = require("LoadGame")
+-- local update_game = require("updateGame")
+local draw_game = require("DrawGame")
+local debug_menu= require("DebugMenu")
 
+-- ISTRUCTIONS UPON GAME STARTUP
+function love.load() load_game.load() end
 
-------------------------------------------------------------
--- FUNZIONE DI AVVIO
-------------------------------------------------------------
-function love.load()
-    love.window.setTitle("RPG con Camera e Dialoghi")
-    love.window.setMode(800, 600) -- finestra base (ma può essere ridimensionata)
-
-    -- Ottieni dimensioni iniziali della finestra
-    screenWidth, screenHeight = love.graphics.getDimensions()
-
-    --------------------------------------------------------
-    -- GIOCATORE (un quadrato bianco)
-    --------------------------------------------------------
-    player = {
-        x = 400, y = 300,    -- posizione nel mondo
-        size = 50,           -- lato del quadrato
-        speed = 300          -- velocità di movimento (pixel/secondo)
-    }
-
-    --------------------------------------------------------
-    -- NPC (array di personaggi)
-    -- Ogni NPC ha:
-    --  - posizione (x, y)
-    --  - colore unico
-    --  - dimensione e distanza per iniziare il dialogo
-    --  - struttura dialog: testo + scelte + risposte associate
-    --------------------------------------------------------
-    npcs = {
-        {
-            x = 600, y = 300, size = 50, color = {1, 0, 0}, talkDistance = 80,
-            dialog = {
-                text = "Ciao! Scegli cosa fare:",
-                choices = {"Saluta", "Ignora", "Chiedi aiuto"},
-                responses = {"Hai salutato cordialmente!", "Hai ignorato l'NPC... un po' scortese!", "L'NPC ti aiuta volentieri!"}
-            }
-        },
-        {
-            x = 200, y = 200, size = 50, color = {0, 1, 0}, talkDistance = 80,
-            dialog = {
-                text = "NPC Verde ti parla:",
-                choices = {"Ascolta", "Ignora", "Chiedi informazioni"},
-                responses = {"Hai ascoltato attentamente.", "Hai ignorato il verde NPC.", "L'NPC ti da informazioni!"}
-            }
-        },
-        {
-            x = 650, y = 500, size = 50, color = {0, 0, 1}, talkDistance = 80,
-            dialog = {
-                text = "NPC Blu ti guarda:",
-                choices = {"Saluta", "Ignora", "Chiedi aiuto"},
-                responses = {"Saluto ricevuto con un sorriso!", "Hai ignorato l'NPC blu.", "L'NPC blu ti aiuta!"}
-            }
-        },
-        {
-            x = 100, y = 450, size = 50, color = {1, 1, 0}, talkDistance = 80,
-            dialog = {
-                text = "NPC Giallo appare:",
-                choices = {"Parla", "Ignora", "Ringrazia"},
-                responses = {"Parli con NPC Giallo.", "Hai ignorato l'NPC giallo.", "NPC Giallo ti sorride!"}
-            }
-        }
-    }
-
-    --------------------------------------------------------
-    -- DIALOGHI
-    --------------------------------------------------------
-    dialogActive = false   -- se true, il giocatore non si muove
-    currentDialog = nil    -- conterrà i dati del dialogo in corso
-
-    textIndex = 0          -- indice della lettera mostrata (per effetto “macchina da scrivere”)
-    textTimer = 0          -- contatore temporale per animare il testo
-    textSpeed = 30         -- lettere al secondo
-
-    -- Impostazioni grafiche della dialog box
-    maxBoxWidth = 450
-    maxBoxHeight = 200
-    padding = 10           -- margine interno testo-box
-
-    --------------------------------------------------------
-    -- CAMERA
-    --------------------------------------------------------
-    camera = { x = 0, y = 0 }
-
-    -- Percentuale della finestra che costituisce la “dead zone”
-    cameraMarginFractionX = 0.30
-    cameraMarginFractionY = 0.30
-    cameraMarginX = screenWidth * cameraMarginFractionX
-    cameraMarginY = screenHeight * cameraMarginFractionY
-
-    -- All'avvio centra la camera sul player
-    camera.x = player.x + player.size/2 - screenWidth/2
-    camera.y = player.y + player.size/2 - screenHeight/2
-end
-
-
-------------------------------------------------------------
--- GESTIONE RIDIMENSIONAMENTO FINESTRA
-------------------------------------------------------------
-function love.resize(w, h)
-    screenWidth, screenHeight = w, h
-    -- Ricalcola le dimensioni della dead zone
-    cameraMarginX = screenWidth * cameraMarginFractionX
-    cameraMarginY = screenHeight * cameraMarginFractionY
-end
-
-
-------------------------------------------------------------
--- FUNZIONI DI UTILITÀ
-------------------------------------------------------------
-
--- Controlla se due rettangoli si sovrappongono (collisione AABB)
-local function checkCollision(a, b)
-    return a.x < b.x + b.size and
-           b.x < a.x + a.size and
-           a.y < b.y + b.size and
-           b.y < a.y + a.size
-end
-
--- Distanza euclidea fra i centri di due quadrati
-local function distance(a, b)
-    local dx = (a.x + a.size/2) - (b.x + b.size/2)
-    local dy = (a.y + a.size/2) - (b.y + b.size/2)
-    return math.sqrt(dx*dx + dy*dy)
-end
-
--- Divide il testo in righe per sapere quante ne contiene
-local function splitLines(text)
-    local t = {}
-    for line in text:gmatch("[^\n]+") do table.insert(t, line) end
-    if #t == 0 then return { "" } end
-    return t
-end
-
--- Calcola dimensioni ottimali della dialog box
--- tenendo conto del testo e delle scelte
-local function calculateBox(text, font, choices)
-    love.graphics.setFont(font)
-    local lines = splitLines(text)
-    local choiceLines = choices and #choices or 0
-    local totalLines = #lines + choiceLines
-
-    local height = totalLines * font:getHeight() + padding * 2
-    local width = 0
-
-    -- Calcola la larghezza massima fra testo e scelte
-    for _, line in ipairs(lines) do
-        width = math.max(width, font:getWidth(line) + padding * 2)
-    end
-    if choices then
-        for _, choice in ipairs(choices) do
-            width = math.max(width, font:getWidth(choice) + padding * 2)
-        end
-    end
-
-    width = math.min(width, maxBoxWidth)
-    height = math.min(height, maxBoxHeight)
-
-    return width, height, #lines
-end
-
-
-------------------------------------------------------------
--- AGGIORNAMENTO LOGICA DI GIOCO
-------------------------------------------------------------
+-- dt = delta time (secondi trascorsi dall'ultimo frame)
 function love.update(dt)
-    local moveX, moveY = 0, 0
-
-    --------------------------------------------------------
-    -- MOVIMENTO PLAYER (solo se non in dialogo)
-    --------------------------------------------------------
-    if not dialogActive then
-        if love.keyboard.isDown("w", "up", "kp8") then moveY = moveY - 1 end
-        if love.keyboard.isDown("s", "down", "kp2") then moveY = moveY + 1 end
-        if love.keyboard.isDown("a", "left", "kp4") then moveX = moveX - 1 end
-        if love.keyboard.isDown("d", "right", "kp6") then moveX = moveX + 1 end
-
-        -- Normalizza diagonale (per non andare più veloce)
-        if moveX ~= 0 and moveY ~= 0 then
-            local inv = 1 / math.sqrt(2)
-            moveX = moveX * inv
-            moveY = moveY * inv
-        end
-
-        -- Calcola la posizione candidata e verifica se collide con NPC
-        local candidate = {
-            x = player.x + moveX * player.speed * dt,
-            y = player.y + moveY * player.speed * dt,
-            size = player.size
-        }
-
-        local coll = false
-        for _, npc in ipairs(npcs) do
-            if checkCollision(candidate, npc) then
-                coll = true
-                break
-            end
-        end
-
-        -- Se non collide, aggiorna posizione effettiva
-        if not coll then
-            player.x = candidate.x
-            player.y = candidate.y
-        end
-    end
-
-    --------------------------------------------------------
-    -- ANIMAZIONE TESTO DEL DIALOGO
-    --------------------------------------------------------
-    if dialogActive and currentDialog and textIndex < #currentDialog.displayedText then
-        textTimer = textTimer + dt
-        local lettersToShow = math.floor(textTimer * textSpeed)
-        if lettersToShow > 0 then
-            textIndex = math.min(textIndex + lettersToShow, #currentDialog.displayedText)
-            textTimer = 0
-        end
-    end
-
-    --------------------------------------------------------
-    -- CAMERA CON “DEAD ZONE”
-    -- La camera si sposta solo se il giocatore esce dal margine
-    --------------------------------------------------------
-    local left   = camera.x + cameraMarginX
-    local right  = camera.x + screenWidth - cameraMarginX
-    local top    = camera.y + cameraMarginY
-    local bottom = camera.y + screenHeight - cameraMarginY
-
-    if player.x < left then
-        camera.x = camera.x - (left - player.x)
-    elseif player.x + player.size > right then
-        camera.x = camera.x + (player.x + player.size - right)
-    end
-
-    if player.y < top then
-        camera.y = camera.y - (top - player.y)
-    elseif player.y + player.size > bottom then
-        camera.y = camera.y + (player.y + player.size - bottom)
-    end
+    -- Per un MVP monocolore non serve logica, ma qui aggiorneresti:
+    -- animazioni, input continui, timers, fisica, ecc.
 end
 
+-- DRAW ON EACH FRAME
+function love.draw() draw_game.draw() end
 
-------------------------------------------------------------
--- INPUT DA TASTIERA
-------------------------------------------------------------
+-- KEYBOARD EVENTS LISTENER
 function love.keypressed(key)
-    -- Se premo E e non sono in dialogo, cerca un NPC vicino
-    if key == "e" and not dialogActive then
-        for _, npc in ipairs(npcs) do
-            if distance(player, npc) <= npc.talkDistance then
-                dialogActive = true
-                currentDialog = {
-                    displayedText = npc.dialog.text,
-                    choices = npc.dialog.choices,
-                    responses = npc.dialog.responses,
-                    selected = 1,
-                    npcRef = npc
-                }
-                textIndex = 0
-                textTimer = 0
-                break
-            end
-        end
-        return
+    if key == "escape" then
+        love.event.quit() -- Quit the game
     end
 
-    -- Se il dialogo è attivo...
-    if dialogActive and currentDialog then
-        -- Completa subito il testo se non ancora mostrato interamente
-        if textIndex < #currentDialog.displayedText then
-            textIndex = #currentDialog.displayedText
-            return
-        end
+    -- The key [Alt] + [D] toggles the debug menu
+    if key == debug_menu.show.toggle_key and love.keyboard.isDown("lalt", "ralt") then
+        debug_menu.toggleShow()
+    end
 
-        -- Navigazione fra le scelte
-        if key == "w" or key == "up" or key == "kp8" then
-            currentDialog.selected = currentDialog.selected - 1
-            if currentDialog.selected < 1 then
-                currentDialog.selected = #currentDialog.choices
-            end
-        elseif key == "s" or key == "down" or key == "kp2" then
-            currentDialog.selected = currentDialog.selected + 1
-            if currentDialog.selected > #currentDialog.choices then
-                currentDialog.selected = 1
-            end
-        elseif key == "return" then
-            -- Conferma scelta: mostra risposta associata
-            local resp = currentDialog.responses[currentDialog.selected] or ""
-            currentDialog.displayedText = resp
-            textIndex = 0
-            textTimer = 0
+    -- The key [Alt] + [L] toggles the debug menu length
+    -- (only if the debug menu is shown)
+    if ((key == debug_menu.length.toggle_key) and love.keyboard.isDown("lalt", "ralt")) and debug_menu.show.value then
+        debug_menu.toggleLength()
+    end
 
-            -- Se la scelta contiene "ignora", chiudi il dialogo
-            if currentDialog.choices[currentDialog.selected]:lower():find("ignora") then
-                dialogActive = false
-                currentDialog = nil
-            end
-        end
+    -- The key [Alt] + [M] toggles the debug mode
+    -- (only if the debug menu is shown)
+    if ((key == debug_menu.mode.toggle_key) and love.keyboard.isDown("lalt", "ralt")) and debug_menu.show.value then
+        debug_menu.toggleMode()
+    end
+
+    -- Altri tasti utili in sviluppo:
+    if key == "f" then
+        love.window.setFullscreen(not love.window.getFullscreen())
     end
 end
 
+-- GAME WINDOW RESIZING
+function love.resize(w, h)
+    screenW, screenH = w, h
+    -- Qui puoi ricalcolare layout UI, dead-zone camera, ecc.
+end
 
-------------------------------------------------------------
--- RENDERING
-------------------------------------------------------------
-function love.draw()
-    -- Sfondo blu scuro
-    love.graphics.clear(0.1, 0.1, 0.15)
-
-    -- "Sposta" il sistema di coordinate in base alla camera
-    love.graphics.push()
-    love.graphics.translate(-camera.x, -camera.y)
-
-    -- Disegna NPC (colorati)
-    for _, npc in ipairs(npcs) do
-        love.graphics.setColor(unpack(npc.color))
-        love.graphics.rectangle("fill", npc.x, npc.y, npc.size, npc.size)
+-- Opzionale: pausa quando si perde il focus
+function love.focus(f)
+    if not f then
+        -- la finestra ha perso il focus: potresti mettere game paused = true
+        -- paused = true
+    else
+        -- riprendi
+        -- paused = false
     end
+end
 
-    -- Disegna il giocatore (bianco)
-    love.graphics.setColor(1, 1, 1)
-    love.graphics.rectangle("fill", player.x, player.y, player.size, player.size)
-
-    -- Ripristina coordinate schermo (per GUI e dialoghi)
-    love.graphics.pop()
-
-    --------------------------------------------------------
-    -- DIALOG BOX
-    --------------------------------------------------------
-    if dialogActive and currentDialog then
-        local font = love.graphics.getFont()
-        local text = string.sub(currentDialog.displayedText, 1, textIndex)
-
-        -- Calcola dimensione della box dinamicamente
-        local boxWidth, boxHeight, textLinesCount = calculateBox(text, font, currentDialog.choices)
-
-        -- Posiziona la box sopra l'NPC (convertendo coordinate mondo -> schermo)
-        local boxX = currentDialog.npcRef.x - camera.x + currentDialog.npcRef.size/2 - boxWidth/2
-        local boxY = currentDialog.npcRef.y - camera.y - boxHeight - 10
-
-        -- Evita che la box esca dallo schermo
-        if boxX < 0 then boxX = 0 end
-        if boxX + boxWidth > screenWidth then boxX = screenWidth - boxWidth end
-        if boxY < 0 then boxY = 0 end
-
-        -- Disegna rettangolo semi-trasparente
-        love.graphics.setColor(0, 0, 0, 0.85)
-        love.graphics.rectangle("fill", boxX, boxY, boxWidth, boxHeight, 6, 6)
-
-        -- Bordo bianco
-        love.graphics.setColor(1, 1, 1)
-        love.graphics.rectangle("line", boxX, boxY, boxWidth, boxHeight, 6, 6)
-
-        -- Testo principale (animato)
-        love.graphics.printf(text, boxX + padding, boxY + padding,
-                             boxWidth - 2 * padding, "left")
-
-        -- Disegna le scelte (solo dopo che il testo è completato)
-        if textIndex >= #currentDialog.displayedText and currentDialog.choices then
-            local fontH = font:getHeight()
-            local startY = boxY + padding + (textLinesCount * fontH) + 10
-            for i, choice in ipairs(currentDialog.choices) do
-                if i == currentDialog.selected then
-                    love.graphics.setColor(0, 1, 0) -- evidenziata
-                else
-                    love.graphics.setColor(1, 1, 1)
-                end
-                love.graphics.printf(choice,
-                    boxX + padding * 2, startY + (i - 1) * (fontH + 4),
-                    boxWidth - 4 * padding, "left")
-            end
-        end
-    end
+-- Opzionale: pulizie prima di uscire
+function love.quit()
+    -- salva lo stato se necessario
+    -- es: love.filesystem.write("save.dat", serializedState)
 end
