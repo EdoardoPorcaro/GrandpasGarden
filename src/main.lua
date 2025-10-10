@@ -21,22 +21,8 @@ function love.keypressed(key)
         love.event.quit() -- Quit the game
     end
 
-    -- The key [Alt] + [D] toggles the debug menu
-    if key == debug_menu.show.toggle_key and love.keyboard.isDown("lalt", "ralt") then
-        debug_menu.toggleShow()
-    end
-
-    -- The key [Alt] + [L] toggles the debug menu length
-    -- (only if the debug menu is shown)
-    if ((key == debug_menu.length.toggle_key) and love.keyboard.isDown("lalt", "ralt")) and debug_menu.show.value then
-        debug_menu.toggleLength()
-    end
-
-    -- The key [Alt] + [M] toggles the debug mode
-    -- (only if the debug menu is shown)
-    if ((key == debug_menu.mode.toggle_key) and love.keyboard.isDown("lalt", "ralt")) and debug_menu.show.value then
-        debug_menu.toggleMode()
-    end
+    -- Listen for keys that toggle the debug menu
+    debug_menu.keypressed(key)
 
     -- Altri tasti utili in sviluppo:
     if key == "f" then

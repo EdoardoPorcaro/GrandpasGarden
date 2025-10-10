@@ -50,18 +50,6 @@ function debug_menu.addToCustomDebugText(variable, value)
     table.insert(custom_debug_text, {variable = variable, value = value})
 end
 
-function debug_menu.toggleShow()
-    debug_menu.show.value = not debug_menu.show.value
-end
-
-function debug_menu.toggleLength()
-    debug_menu.length.value = not debug_menu.length.value
-end
-
-function debug_menu.toggleMode()
-    debug_menu.mode.value = not debug_menu.mode.value
-end
-
 -- Defines how to draw the actual debug menu
 -- when it's toggled
 function debug_menu.draw()
@@ -201,6 +189,25 @@ function debug_menu.draw()
                 offset_x = offset_x + font:getWidth(t.text)
             end
         end
+    end
+end
+
+function debug_menu.keypressed(key)
+    -- The key [Alt] + [D] toggles the debug menu
+    if key == debug_menu.show.toggle_key and love.keyboard.isDown("lalt", "ralt") then
+        debug_menu.show.value = not debug_menu.show.value
+    end
+
+    -- The key [Alt] + [L] toggles the debug menu length
+    -- (only if the debug menu is shown)
+    if ((key == debug_menu.length.toggle_key) and love.keyboard.isDown("lalt", "ralt")) and debug_menu.show.value then
+        debug_menu.length.value = not debug_menu.length.value
+    end
+
+    -- The key [Alt] + [M] switches between debug modes
+    -- (only if the debug menu is shown)
+    if ((key == debug_menu.mode.toggle_key) and love.keyboard.isDown("lalt", "ralt")) and debug_menu.show.value then
+        debug_menu.mode.value = not debug_menu.mode.value
     end
 end
 
