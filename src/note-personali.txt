@@ -1,3 +1,0 @@
-Su Visual Studio Code (purché loggato con i miei account Microsoft e GitHub):
-
-- fare Alt + Shift + L per salvare tutti i file e far partire automaticamente il gioco LUA
