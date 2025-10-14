@@ -1,34 +1,27 @@
+----------------------------------------------
+---------------- [ main.lua ] ----------------
+----------------------------------------------
+
+-- Sets the proper modules path
+package.path = package.path .. ";src/?.lua;src/?/init.lua"
+
+-- Import main modules
 local load_game = require("LoadGame")
--- local update_game = require("updateGame")
+local update_game = require("UpdateGame")
 local draw_game = require("DrawGame")
-local debug_menu= require("DebugMenu")
+local keypressed_game = require("KeyPressedGame")
 
 -- ISTRUCTIONS UPON GAME STARTUP
 function love.load() load_game.load() end
 
 -- dt = delta time (secondi trascorsi dall'ultimo frame)
-function love.update(dt)
-    -- Per un MVP monocolore non serve logica, ma qui aggiorneresti:
-    -- animazioni, input continui, timers, fisica, ecc.
-end
+function love.update(dt) update_game.update(dt) end
 
 -- DRAW ON EACH FRAME
 function love.draw() draw_game.draw() end
 
 -- KEYBOARD EVENTS LISTENER
-function love.keypressed(key)
-    if key == "escape" then
-        love.event.quit() -- Quit the game
-    end
-
-    -- Listen for keys that toggle the debug menu
-    debug_menu.keypressed(key)
-
-    -- Altri tasti utili in sviluppo:
-    if key == "f" then
-        love.window.setFullscreen(not love.window.getFullscreen())
-    end
-end
+function love.keypressed(key) keypressed_game.keypressed(key) end
 
 -- GAME WINDOW RESIZING
 function love.resize(w, h)
@@ -36,9 +29,9 @@ function love.resize(w, h)
     -- Qui puoi ricalcolare layout UI, dead-zone camera, ecc.
 end
 
--- Opzionale: pausa quando si perde il focus
-function love.focus(f)
-    if not f then
+-- 
+function love.focus(focused)
+    if not focused then
         -- la finestra ha perso il focus: potresti mettere game paused = true
         -- paused = true
     else

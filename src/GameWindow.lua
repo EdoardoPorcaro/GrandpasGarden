@@ -1,8 +1,5 @@
 ----------------------------------------------
--------------- [ gameWindow.lua] -------------
-----------------------------------------------
---- Defines characteristics and functions  ---
---- regarding the game window.             ---
+------------- [ GameWindow.lua ] -------------
 ----------------------------------------------
 
 --- Set the characteristics of the game window
@@ -22,7 +19,6 @@ local game_window = {
 }
 
 --- Apply the aforementioned characteristics of the game window
---- (on loadGame)
 function game_window.set()
     love.window.setTitle(game_window.title)
     love.window.setMode(game_window.default_width, game_window.default_height, game_window.flags)
