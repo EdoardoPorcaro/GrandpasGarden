@@ -25,7 +25,7 @@ function love.keypressed(key) keypressed_game.keypressed(key) end
 
 -- GAME WINDOW RESIZING
 function love.resize(w, h)
-    screenW, screenH = w, h
+    local screenW, screenH = w, h
     -- Qui puoi ricalcolare layout UI, dead-zone camera, ecc.
 end
 

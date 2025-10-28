@@ -15,13 +15,24 @@ local game_window = {
         fullscreen = false,
         centered = true
     },
-    fullscreen_toggle_key = 'f'
+    fullscreen_toggle_key = 'f',
+    quit_key = 'escape'
 }
 
 --- Apply the aforementioned characteristics of the game window
 function game_window.set()
     love.window.setTitle(game_window.title)
     love.window.setMode(game_window.default_width, game_window.default_height, game_window.flags)
+end
+
+-- Set fullscreen on 'f' keypress and quit on 'escape' keypress
+function game_window.keypressed(key)
+    if key == game_window.quit_key then
+        love.event.quit() -- Quit the game
+    end
+    if key == game_window.fullscreen_toggle_key then
+        love.window.setFullscreen(not love.window.getFullscreen())
+    end
 end
 
 return game_window

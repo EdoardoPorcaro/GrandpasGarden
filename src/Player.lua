@@ -4,21 +4,19 @@
 
 local player = {
     name = "Edoardo",
-    position = {
-        x = 100,
-        y = 100
-    },
-    speed = {
-        walking = 100,
-        running = 200
-    },
-    status = "walking"  -- can be: idle, locked, walking, running, talking
+    position = { x = 100, y = 100 },
+    speed = { walking = 100, running = 200 },
+    status = 2, -- 0 locked | 1 talking | 2 idle | 3 walking | 4 running
+    sprite = love.graphics.newImage("assets/sprites/player.png")
 }
 
-local assets = require("Assets")
-
--- default render size (used by DrawGame)
-player.size = 12
+local controls = {
+    up = { "w", "up" },
+    down = { "s", "down" },
+    left = { "a", "left" },
+    right = { "d", "right" },
+    run = { "lshift", "rshift" }
+}
 
 -- Move using a direction vector (dx, dy). dx/dy typically -1..1.
 -- The function normalizes diagonal movement so speed is constant in all directions.
@@ -40,62 +38,39 @@ function player.move(dt, dx, dy, isRunning)
     player.position.y = player.position.y + dy * speed * dt
 end
 
-function player.update(dt)
-    player.status = "idle"
-    
-    --[[local player_moving = {
-        up = false,
-        down = false,
-        left = false,
-        right = false
-    }]] local dx, dy = 0, 0
+function player.update(dt) 
+    local dx, dy = 0, 0
 
-    if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-        --player_moving.up = true
-        dy = dy - 1
-        player.status = "walking"
-    end
-    if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-        dy = dy + 1
-        player.status = "walking"
-    end
-    if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-        dx = dx - 1
-        player.status = "walking"
-    end
-    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-        dx = dx + 1
-        player.status = "walking"
-    end
+    -- If the player is allowed to move and no Alt key is being pressed,
+    -- listen for which key is being pressed and then move the player accordingly
+    if player.status > 1 and not love.keyboard.isDown("lalt", "ralt") then
+        if love.keyboard.isDown({"w", "up"}) then
+            dy = dy - 1
+            player.status = love.keyboard.isDown(controls.run) and 4 or 3
+        end
+        if love.keyboard.isDown(controls.down) then
+            dy = dy + 1
+            player.status = love.keyboard.isDown(controls.run) and 4 or 3
+        end
+        if love.keyboard.isDown(controls.left) then
+            dx = dx - 1
+            player.status = love.keyboard.isDown(controls.run) and 4 or 3
+        end
+        if love.keyboard.isDown(controls.right) then
+            dx = dx + 1
+            player.status = love.keyboard.isDown(controls.run) and 4 or 3
+        end
 
-    --local isRunning = love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift")
-    if love.keyboard.isDown("lshift") or love.keyboard.isDown("rshift") then
-        player.status = "running"
-        isRunning = true
-    end
+        -- Call the vector-based move; it will normalize diagonal movement
+        player.move(dt, dx, dy, player.status == 4)
 
-    -- Call the vector-based move; it will normalize diagonal movement
-    player.move(dt, dx, dy, isRunning)
+        -- (Re)Set player status to idle if no movement occurred
+        player.status = (dx == 0 and dy == 0) and 2 or player.status
+    end
 end
 
 function player.draw()
-    -- Draw the player as a simple circle
-    local img = assets.player.sprite
-    if img then
-        -- Draw sprite centered on player.position and scaled to player.size
-        local iw, ih = img:getDimensions()
-        -- target diameter = player.size * 2
-        local target = player.size * 2
-        local scale = target / math.max(iw, ih)
-        love.graphics.setColor(1, 1, 1)
-        love.graphics.draw(img, player.position.x, player.position.y, 0, scale, scale, iw/2, ih/2)
-    --[[else
-        love.graphics.setColor(0.9, 0.7, 0.3)
-        love.graphics.circle("fill", player.position.x, player.position.y, player.size)
-        -- optional outline
-        love.graphics.setColor(0.1, 0.1, 0.1)
-        love.graphics.circle("line", player.position.x, player.position.y, player.size)]]
-    end
+    love.graphics.draw(player.sprite, player.position.x, player.position.y, 0, 1, 1, player.sprite:getWidth()/2, player.sprite:getHeight()/2)
 end
 
 return player

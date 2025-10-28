@@ -1,0 +1,31 @@
+{
+    // ----------------------------------------------------------------- //
+    // --------------------- Run and debug settings -------------------- //
+    // ----------------------------------------------------------------- //
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Debug",
+            "program": {
+                "command": "love"
+            },
+            "args": [
+                ".",
+                "debug"
+            ],
+        },
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Run",
+            "program": {
+                "command": "love"
+            },
+            "args": [
+                ".",
+            ],
+        },
+    ]
+}
